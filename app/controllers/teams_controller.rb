@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
  end
 
  def show
-   @team = Team.find(params[:name])
+   @team = Team.find(params[:id])
    render json: @team
  end
 

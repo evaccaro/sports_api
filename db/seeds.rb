@@ -34,13 +34,9 @@ sports = ["football", "basketball", "baseball"]
 
 
 #create sport objects using above array
-# grab all players
-
-Sport.destroy_all
-Team.destroy_all
-
-
-# name_brief: Player.name_brief(player)
+# grab all players from API endpoint
+#iterate through sports, then through players from API to create Team, Position, and Player objects
+#update Position and Player objects with average ages after they've been created
 
 sports.each do |sport|
   sport_inst = Sport.create(name: sport)
@@ -49,7 +45,6 @@ sports.each do |sport|
   team = Team.find_or_create_by(name: player["pro_team"], sport: sport_inst)
   position = Position.find_or_create_by(name: player["position"], sport: sport_inst)
   player = Player.create(name_brief: Player.name_brief(team, player), first_name: player["firstname"], last_name: player["lastname"], position: position, age: player["age"], team: team)
-  # team.players << Player.create()
   end
 end
 
@@ -64,14 +59,3 @@ Player.all.each do |player|
     player.update(average_position_age_diff: Player.average_position_age_diff(player))
   end
 end
-
-byebug
-
-
-#create player objects
-# sports_players.each do |player|
-#   Player.create(first_name: player["firstname"], last_name: player["lastname"], age: player["age"])
-
-
-#create teams from newly created sport objects
-# teams = sports_players.map { |player| Team.find_or_create_by(name: player["pro_team"], sport_id: Sport.where("name = ?", )) }
