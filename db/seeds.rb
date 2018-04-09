@@ -47,9 +47,21 @@ sports.each do |sport|
   sports_players = GetSport.new.get_sport_players(sport)
   sports_players.each do |player|
   team = Team.find_or_create_by(name: player["pro_team"], sport: sport_inst)
-  position = Position.find_or_create_by(name: player["position"], average_age: Player.where("position_id = ?", player["position"].id).average(:age), sport: sport_inst)
+  position = Position.find_or_create_by(name: player["position"], sport: sport_inst)
   player = Player.create(name_brief: Player.name_brief(team, player), first_name: player["firstname"], last_name: player["lastname"], position: position, age: player["age"], team: team)
   # team.players << Player.create()
+  end
+end
+
+Position.all.each do |position|
+  if position.players.length > 0
+    position.update(average_age: Position.average_age(position))
+  end
+end
+
+Player.all.each do |player|
+  if player["age"] != nil
+    player.update(average_position_age_diff: Player.average_position_age_diff(player))
   end
 end
 

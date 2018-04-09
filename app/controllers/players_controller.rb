@@ -6,7 +6,10 @@ class PlayersController < ApplicationController
   end
 
  def create
-   @player = Player.create(params)
+   @player = Player.new(params)
+   if @player.valid?
+     @player.save
+   end
    render json: Player.all
  end
 

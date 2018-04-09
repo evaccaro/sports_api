@@ -6,12 +6,15 @@ class PositionsController < ApplicationController
   end
 
  def create
-   @position = Position.create(params)
+   @position = Position.new(params)
+   if @position.valid?
+     @position.save
+   end
    render json: Position.all
  end
 
  def show
    @position = Position.find(params[:name])
  end
- 
+
 end
