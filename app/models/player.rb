@@ -20,7 +20,7 @@ class Player < ApplicationRecord
       player_age = player[:age]
     if avg_for_position != nil
       if avg_for_position.average_age != nil
-        return avg_for_position.average_age-player_age
+        return player_age-avg_for_position.average_age
       end
     end
   end

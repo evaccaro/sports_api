@@ -10,11 +10,20 @@ class PositionsController < ApplicationController
    if @position.valid?
      @position.save
    end
-   render json: Position.all
+   render json: {
+     id: @position.id,
+     name: @position.name,
+     average_age: @position.average_age
+     }
  end
 
  def show
    @position = Position.find(params[:name])
+   render json: {
+     id: @position.id,
+     name: @position.name,
+     average_age: @position.average_age
+     }
  end
 
 end

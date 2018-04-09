@@ -6,12 +6,25 @@ class SportsController < ApplicationController
   end
 
  def create
-   @sport = Sport.create(params)
-   render json: Sport.all
+   @sport = Sport.new(params)
+   if @sport.save
+   render json: {
+      name: @sport.name,
+      players: @sport.players.map do |player|
+      PlayerSerializer.new(player)
+    end
+  }
+end
  end
 
  def show
-   @sport = Sport.find(params[:name])
- end 
+   @sport = Sport.find(params[:id])
+   render json: {
+      name: @sport.name,
+      players: @sport.players.map do |player|
+      PlayerSerializer.new(player)
+    end
+  }
+ end
 
 end

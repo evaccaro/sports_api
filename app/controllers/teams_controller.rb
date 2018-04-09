@@ -12,6 +12,7 @@ class TeamsController < ApplicationController
 
  def show
    @team = Team.find(params[:name])
- end 
+   render json: @team
+ end
 
 end
