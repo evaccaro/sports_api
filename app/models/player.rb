@@ -16,7 +16,7 @@ class Player < ApplicationRecord
   end
 
   def self.average_position_age_diff(player)
-      avg_for_position = Position.where("id = ?", player)[0]
+      avg_for_position = Position.where("id = ?", player.position_id)[0]
       player_age = player[:age]
     if avg_for_position != nil
       if avg_for_position.average_age != nil
