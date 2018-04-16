@@ -5,14 +5,27 @@ class Player < ApplicationRecord
   validates :first_name, presence: true, allow_blank: false
 
 
-  def self.name_brief(team, player)
-    if (team.sport_id === 1)
-      return "#{player["firstname"][0]}. #{player["lastname"]}"
-    elsif (team.sport_id === 2)
-      return "#{player["firstname"]} #{player["lastname"][0]}."
-    elsif (team.sport_id === 3)
-      return "#{player["firstname"][0]}. #{player["lastname"][0]}."
-    end
+  # def self.name_brief(team, player)
+  #   if (team.sport_id === 1)
+  #     return "#{player["firstname"][0]}. #{player["lastname"]}"
+  #   elsif (team.sport_id === 2)
+  #     return "#{player["firstname"]} #{player["lastname"][0]}."
+  #   elsif (team.sport_id === 3)
+  #     return "#{player["firstname"][0]}. #{player["lastname"][0]}."
+  #   end
+  # end
+
+  def name_brief
+      case self.team.sport_id
+      when 1
+        return "#{self.first_name[0]}. #{self.last_name}";
+      when 2
+        return "#{self.first_name} #{self.last_name[0]}.";
+      when 3
+        return "#{self.first_name[0]}. #{self.last_name[0]}.";
+      else
+        return "#{self.first_name}. #{self.last_name}.";
+      end      
   end
 
   def self.average_position_age_diff(player)

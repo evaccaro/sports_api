@@ -2,7 +2,7 @@ class PositionsController < ApplicationController
 
   def index
     @positions = Position.all
-    render json: @positions
+    render :json => @positions, each_serializer: PositionSerializer
   end
 
  def create
