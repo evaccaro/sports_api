@@ -56,7 +56,7 @@ end
 
 Player.all.each do |player|
   if player["age"] != nil
-    player.update(average_position_age_diff: Player.average_position_age_diff(player))
+    player.update(average_position_age_diff: player.average_position_age_diff)
   end
 
   player.update(name_brief: player.name_brief)

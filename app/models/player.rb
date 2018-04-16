@@ -25,15 +25,27 @@ class Player < ApplicationRecord
         return "#{self.first_name[0]}. #{self.last_name[0]}.";
       else
         return "#{self.first_name}. #{self.last_name}.";
-      end      
+      end
   end
 
-  def self.average_position_age_diff(player)
-      avg_for_position = Position.where("id = ?", player.position_id)[0]
-      player_age = player[:age]
-    if avg_for_position != nil
-      if avg_for_position.average_age != nil
-        return player_age-avg_for_position.average_age
+  # def self.average_position_age_diff(player)
+  #     avg_for_position = Position.where("id = ?", player.position_id)[0]
+  #     player_age = player[:age]
+  #   if avg_for_position != nil
+  #     if avg_for_position.average_age != nil
+  #       return player_age-avg_for_position.average_age
+  #     end
+  #   end
+  # end
+
+  def average_position_age_diff
+        avg_for_position = Position.where("id = ?", self.position_id)[0]
+        player_age = self.age
+      if avg_for_position != nil
+        if avg_for_position.average_age != nil
+          if player_age != nil
+          return player_age-avg_for_position.average_age
+        end
       end
     end
   end
