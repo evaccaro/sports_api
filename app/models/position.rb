@@ -14,11 +14,12 @@ class Position < ApplicationRecord
   # end
     # Player.average(:age, :conditions => ["position_id = ?", position.id])
 
-  def self.average_age(position)
+  # def self.average_age(position)
+  #     Player.where("position_id = ?", position.id).average(:age).round
+  # end
 
-      Player.where("position_id = ?", position.id).average(:age).round
-
-    # Player.where("position = ?", player["position"]).pluck(:age)
+  def average_age
+    Player.where("position_id = ?", self.id).average(:age).round
   end
 
 

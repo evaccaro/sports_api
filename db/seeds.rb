@@ -50,7 +50,7 @@ end
 
 Position.all.each do |position|
   if position.players.length > 0
-    position.update(average_age: Position.average_age(position))
+    position.update(average_age: position.average_age)
   end
 end
 
